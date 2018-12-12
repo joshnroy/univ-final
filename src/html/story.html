@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TA Story</title>
+
+    <script src="http://olado.github.io/doT/doT.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="../dedalus.js"></script>
+    <script src="../dedalus-web.js"></script>
+
+    <link rel="stylesheet" href="themes/modern/story.css">
+
+ </head>
+<body>
+    <div id="story">
+
+        <initscript>
+        </initscript>
+
+        <beforeEveryThing>
+        </beforeEveryThing>
+
+        <beforeEveryPageTurn>
+        </beforeEveryPageTurn>
+
+        <beforeEveryParagraphShown>
+        </beforeEveryParagraphShown>
+
+        <afterEveryThing>
+        </afterEveryThing>
+
+        <afterEveryPageTurn>
+        </afterEveryPageTurn>
+
+        <afterEveryParagraphShown>
+        </afterEveryParagraphShown>
+
+        <!-- Novel -->
+        <title>I wanna be the very best (TA)</title>
+
+        <!-- Objects -->
+        <obj id="dummyObject" inventoryName="An object">
+            <action id="Examine">
+                Something happens... who knows what?!
+            </action>
+
+            <action id="Get">
+                <when>!story.isInInventory('dummyObject')</when>
+                As you try to get it... It is clear that the inventory works!
+                {{ story.putInInventory('dummyObject'); }}
+            </action>
+        </obj>
+
+        <!-- Characters -->
+        <character id="alice">
+            <action id="Return Midterm.">
+            <p> You note that she got an 100 on her midterm </p>
+            <p> Wow! I'm so happy! I felt confident on the test, but <i>I'm
+                    not really sure what lead to that.</i> </p>
+            </action>
+            <action id="Ask for reflection">
+            <p> "Did you use any particular study strategies? Which ones
+                do you think worked well for you?" you ask her. </p>
+            <p> I think coming to TA hours and talking through the problems
+                I got wrong on homeworks with the TAs really helped.</p>
+            <p> You think to yourself, "Huh, maybe I should suggest this as a
+                study strategy to other students" </p>
+                {{ story.aliceDone = true; }}
+            </action>
+        </character>
+        <character id="bob">
+            <action id="Ask what's wrong.">
+                <p> It's just that none of the material makes any sense and I'm
+                    starting to think computer science isn't for me </p>
+            </action>
+            <action id="Comfort.">
+                <p> "That's ok, most students don't get most of the material
+                    the first time either. I certainly didn't," you say.</p>
+                <p> Wait really? You're a TA! I just assumed you basically got
+                    100s on everything. </p>
+            </action>
+            <action id="Mindset.">
+                <p> "Just because you don't understand it now doesn't mean you
+                    always won't understand it," you say. "Look how much you've
+                already learned in the class so far!"</p>
+                <p> You know, you're right. I'll try to keep that in mind and
+                    keep trying to improve on the material </p>
+                {{ story.bobDone = true; }}
+            </action>
+        </character>
+        <character id="eve">
+            <action id="Ignore.">
+                <p> Wait, hold on. Your job as a TA is to make sure that all of
+                    your students are getting the most out of the class. You
+                    might as well ask her if she has any questions. </p>
+            </action>
+            <action id="Question?">
+                <p> "What's up? Do you have any questions?" you ask her.</p>
+                <p> Yeah. Actually, I do. I'm just not sure if they're good
+                    questions and so didn't want to sign up. How does this
+                    method work again?</p>
+                <p> "That's not a bad question at all! I had the same one." you
+                    say. <i>You describe to her how the method works.</i> </p>
+                <p> Thanks! That was really helpful. I guess I'll sign up for
+                    hours the next time I don't know how to do something </p>
+                    {{ story.eveDone = true; }}
+            </action>
+            <action id="Signmeup.">
+                <p> If she had a question, she would use signmeup and talk to a
+                    TA. Surely you don't need to go out of your way to ask if
+                    she has a question. </p>
+                <p> You start to question your faith in this statement. She
+                    really looks like she could use some help on this project.
+                    Maybe she feels intimidated to sign up? </p>
+            </action>
+        </character>
+
+        <obj id="signmeup">
+            <action id="Examine">
+                There are two students signed up on the queue, with the
+                following questions. Who would you like to talk to first?
+                <ol>
+                    <li><interact with="alice">Alice</interact>: I would like to see my grade on the midterm</li>
+                    <li><interact with="bob">Bob</interact>: I just don't understand what's going on in this
+                    course...... I don't think I ever will.</li>
+                </ol>
+            </action>
+            <action id="Ignore the Queue">
+                <p>That's a bad idea. That's not what a good TA would do.</p>
+            </action>
+        </obj>
+
+        <!-- Pages -->
+        <page id="intro">
+            As you open your homework (for TA camp no less!) you are
+            transported to an alternate world made of only text. You know not
+            where you are or how you got here, but you know one thing, and one
+            thing only. That you will become the best TA that you can.
+        </page>
+
+        <page id="citlobby" class="first">
+            You wake up again, finding yourself in the lobby of the CIT.
+            "That's strange," you think to yourself. "When did I get here?"
+
+            Suddently, your <show paragraph="getToHours">phone</show>
+            buzzes.
+
+            <!-- <p>Quite unsurprisingly, there is even an <interact with="dummyObject">object</interact> lying around.</p> -->
+
+            <p>You decide that you should probably head to <turn
+                to="cit201">CIT 201</turn>.</p>
+
+            <paragraph id="getToHours">
+                "Hold office hours in CIT 201!" it says. You silence the
+                notification.
+            </paragraph>
+        </page>
+
+        <page id="end">
+        <p> You exit TA hours, awakening from your dream </p>
+        <p> That was a bit strange, in most TA hours you have to decide for
+            yourself what to ask... Regardless, I hope this game helped you
+            learn a little bit more about the different types of students you
+            will interact with at TA hours. </p>
+        </page>
+
+        <page id="cit201">
+        <p><turn to="cit201">Clear</turn> the page. </p>
+        <p><turn to="end">End</turn> ta hours.</p>
+        <p> You enter the room and try to <show paragraph="students">find a chair</show></p>
+
+        <paragraph id="students"> You notice that there are three students
+        sitting in the room. You wonder to yourself if they're working on their
+        own or have questions. It's a bit strange for students to come to
+        CIT 201 to work on their own when there are office hours... You wonder
+        <show paragraph="eveParagraph"> who they are </show></paragraph>
+
+        <paragraph id="eveParagraph"> You notice a <interact
+                   with="eve">student</interact> sitting in the corner, looking
+                   confused, and looking at you (the TA) as if you know the
+                   solution.
+        </paragraph>
+
+        <p>The <interact with="signmeup">signmeup queue</interact> is
+            already up.</p>
+        </page>
+
+    </div>
+
+    <div id="wrapper">
+        <div id="title"></div>
+
+        <div id="inventoryHostWrapper">
+            <h2>Inventory</h2>
+            <div id="inventoryHost"></div>
+        </div>
+
+        <div id="host"></div>
+    </div>
+
+    <div id="interactionHost"></div>
+
+    <div id="undoStageHost"></div>
+
+    <div id="footer">
+        <a id="undoHost" href="#">Undo</a> &bull; <a id="saveHost" href="#">Save</a> &bull; <a id="restoreHost" href="#">Restore</a> &bull; <a id="resetHost" href="#">Reset</a>
+    </div>
+
+    <script>
+        $(function () {
+            new DedalusWeb({
+                domSource         : $('#story'),
+                domTarget         : $('#host'),
+                titleTarget       : $('#title'),
+                inventoryTarget   : $('#inventoryHost'),
+                interactionTarget : $('#interactionHost'),
+                undoTarget        : $('#undoHost'),
+                undoStageTarget   : $('#undoStageHost'),
+                saveTarget        : $('#saveHost'),
+                restoreTarget     : $('#restoreHost'),
+                resetTarget       : $('#resetHost'),
+            });
+        });
+
+    </script>
+</body>
+</html>
